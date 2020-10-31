@@ -7,6 +7,8 @@ public class ShoppingListProgram {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		
+		ShoppingListDatabase db = new ShoppingListDatabase();
+		db.listShoppings();
 		
 		while(true) {
 			String komento = "";
@@ -19,6 +21,7 @@ public class ShoppingListProgram {
 			System.out.println("");
 			System.out.print("> ");
 			komento = input.nextLine();
+			break;
 		}
 
 	}
