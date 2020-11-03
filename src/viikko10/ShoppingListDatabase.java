@@ -19,8 +19,10 @@ public class ShoppingListDatabase {
 			Connection connection = DriverManager.getConnection(URL);
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM ShoppingListItem");
 			ResultSet results = statement.executeQuery();
+			int  laskuri = 1;
 			while(results.next()) {
-				System.out.println(results.getString("title"));
+				System.out.println("(" + laskuri + ")" + results.getString("title"));
+				laskuri++;
 			}
 			results.close();
 			statement.close();

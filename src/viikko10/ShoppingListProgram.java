@@ -4,19 +4,22 @@ import java.util.Scanner;
 
 public class ShoppingListProgram {
 
-	public void lisaaTuote(String tuoteNimi) {
-
-	}
 
 	public void listaaTuotteet() {
 		ShoppingListDatabase db = new ShoppingListDatabase();
-		System.out.println("-- START DB OUTPUT --");
+		System.out.println("Shoppint list contents:");
 		db.listShoppings();
-		System.out.println("-- END DB OUTPUT --");
 		System.out.println();
 		
 	}
 
+	public void lisaaTuote(String tuote) {
+		ShoppingListDatabase db = new ShoppingListDatabase();
+		db.listShoppings();
+		System.out.println("Successfully added " + tuote);
+		System.out.println();
+	}
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		ShoppingListProgram program = new ShoppingListProgram();
@@ -35,7 +38,7 @@ public class ShoppingListProgram {
 			if (solut[0].equals("list")) {
 				program.listaaTuotteet();
 			} else if (solut[0].equals("add")) {
-
+				program.lisaaTuote(solut[1]);
 			} else if (solut[0].equals("remove")) {
 
 			} else if (solut[0].equals("quit")) {
