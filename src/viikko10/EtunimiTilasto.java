@@ -39,8 +39,11 @@ public class EtunimiTilasto {
 		while (!etunimi.equals("lopeta")) {
 			System.out.print("Anna etunimi: ");
 			etunimi = input.nextLine();
+			if(etunimi.equals("lopeta")) {
+				break;				
+			}
 			System.out.print(etunimi + ":" + " ");
-			System.out.println(etunimet.getOrDefault(etunimi, 0));
+			System.out.println(etunimet.getOrDefault(etunimi, 0) + " kappaletta");
 			System.out.println();
 		}
 	}
