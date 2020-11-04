@@ -12,15 +12,15 @@ public class EtunimiTilasto {
 		List<String> rivit = reader.lueRivit();
 
 		/*
-		 * Testi, että lista saatiin luettua ohjelmaan for (int i = 0; i < rivit.size();
+		 * Testi, ettÃ¤ lista saatiin luettua ohjelmaan for (int i = 0; i < rivit.size();
 		 * i++) { System.out.println(rivit.get(i)); }
 		 */
 
 		HashMap<String, Integer> etunimet = new HashMap<>();
 
-		// RIVIT PITÄISI KÄYDÄ LÄPI
-
-		for (String rivi : rivit) {
+		// RIVIT PITÃ„ISI KÃ„YDÃ„ LÃ„PI		
+		for (int i = 0; i < rivit.size(); i++) {		
+			String rivi = rivit.get(i);
 			String[] osat = rivi.split(";");
 
 			String nimi = osat[0];
