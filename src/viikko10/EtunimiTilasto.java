@@ -1,6 +1,7 @@
 package viikko10;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.HashMap;
 
 public class EtunimiTilasto {
@@ -9,27 +10,39 @@ public class EtunimiTilasto {
 
 		TiedostonLukija reader = new TiedostonLukija("etunimet.csv");
 		List<String> rivit = reader.lueRivit();
-		
-		HashMap<String, Integer> Etunimet = new HashMap<>();
-		
-		for (String eka : rivit) {
-			String[] osat = eka.split(";");
+
+		/*
+		 * Testi, että lista saatiin luettua ohjelmaan for (int i = 0; i < rivit.size();
+		 * i++) { System.out.println(rivit.get(i)); }
+		 */
+
+		HashMap<String, Integer> etunimet = new HashMap<>();
+
+		// RIVIT PITÄISI KÄYDÄ LÄPI
+
+		for (String rivi : rivit) {
+			String[] osat = rivi.split(";");
 
 			String nimi = osat[0];
-			
+
 			String lkm = osat[1];
 			lkm = lkm.replaceAll(" ", "");
 			int maara = Integer.parseInt(lkm);
-			
-			int edellinen = Etunimet.getOrDefault(nimi,0);
-			Etunimet.put(nimi, edellinen + maara);
-			
+
+			int edellinen = etunimet.getOrDefault(nimi, 0);
+			etunimet.put(nimi, edellinen + maara);
+
 		}
-		
-		
-		
-		
-		System.out.println(Etunimet);
+
+		Scanner input = new Scanner(System.in);
+		String etunimi = "";
+		while (!etunimi.equals("lopeta")) {
+			System.out.print("Anna etunimi: ");
+			etunimi = input.nextLine();
+			System.out.print(etunimi + ":" + " ");
+			System.out.println(etunimet.getOrDefault(etunimi, 0));
+			System.out.println();
+		}
 	}
 
 }
