@@ -67,17 +67,16 @@ public class ShoppingListDatabase {
 	public void deleteShopping(String shopping) {
 		
 		List<ShoppingListItem> items = new ArrayList<ShoppingListItem>();
+		int deletedId = 0;
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager.getConnection(URL);
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM ShoppingListItem WHERE title LIKE(?)");
 			statement.setString(1, shopping);
 			ResultSet results = statement.executeQuery();
-			int laskuri = 1;
-			while (results.next()) {
-				System.out.println("(" + results.getInt("id") + ") " + results.getString("title"));
-				laskuri++;
-			}
+
+			deletedId = results.getInt("id");
+
 			results.close();
 			statement.close();
 			connection.close();
@@ -86,23 +85,15 @@ public class ShoppingListDatabase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager.getConnection(URL);
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO ShoppingListItem(title) VALUES (?)",
-					Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM ShoppingListItem WHERE id = " + deletedId);
 			
 			statement.setString(1, shopping);
 			statement.executeUpdate();
-			
-			ResultSet keys = statement.getGeneratedKeys();
-			if(keys.next()) {
-				long id = keys.getLong(1);
-			}
-			keys.close();
+
 			statement.close();
 			connection.close();
 
