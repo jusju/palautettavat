@@ -91,7 +91,6 @@ public class ShoppingListDatabase {
 			Connection connection = DriverManager.getConnection(URL);
 			PreparedStatement statement = connection.prepareStatement("DELETE FROM ShoppingListItem WHERE id = " + deletedId);
 			
-			statement.setString(1, shopping);
 			statement.executeUpdate();
 
 			statement.close();
