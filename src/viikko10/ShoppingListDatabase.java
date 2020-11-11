@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListDatabase {
-	private static final String URL = "jdbc:sqlite:C:\\Users\\jusju\\Desktop\\syksy2020\\palautettavat\\shoppinglist.sqlite";
-
+	//private static final String URL = "jdbc:sqlite:C:\\Users\\jusju\\Desktop\\syksy2020\\palautettavat\\shoppinglist.sqlite";
+	private static final String URL = "jdbc:sqlite:.\\shoppinglist.sqlite";
 	
 	public List<ShoppingListItem> listShoppings() {
 		List<ShoppingListItem> items = new ArrayList<ShoppingListItem>();
@@ -21,7 +21,7 @@ public class ShoppingListDatabase {
 			ResultSet results = statement.executeQuery();
 			int  laskuri = 1;
 			while(results.next()) {
-				System.out.println("(" + laskuri + ")" + results.getString("title"));
+				System.out.println("(" + laskuri + ") " + results.getString("title"));
 				laskuri++;
 			}
 			results.close();
