@@ -19,6 +19,13 @@ public class ShoppingListProgram {
 		System.out.println("Successfully added " + tuote);
 		System.out.println();
 	}
+
+	public void poistaTuote(String tuote) {
+		ShoppingListDatabase db = new ShoppingListDatabase();
+		db.deleteShopping(tuote);
+		System.out.println("Successfully deleted " + tuote);
+		System.out.println();
+	}
 	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -40,7 +47,7 @@ public class ShoppingListProgram {
 			} else if (solut[0].equals("add")) {
 				program.lisaaTuote(solut[1]);
 			} else if (solut[0].equals("remove")) {
-
+				program.poistaTuote(solut[1]);
 			} else if (solut[0].equals("quit")) {
 				break;
 			} else {
