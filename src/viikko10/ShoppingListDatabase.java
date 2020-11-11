@@ -66,7 +66,6 @@ public class ShoppingListDatabase {
 	
 	public void deleteShopping(String shopping) {
 		
-		List<ShoppingListItem> items = new ArrayList<ShoppingListItem>();
 		int deletedId = 0;
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -89,8 +88,8 @@ public class ShoppingListDatabase {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager.getConnection(URL);
-			PreparedStatement statement = connection.prepareStatement("DELETE FROM ShoppingListItem WHERE id = " + deletedId);
-			
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM ShoppingListItem WHERE id = ?");
+			statement.setInt(1, deletedId);
 			statement.executeUpdate();
 
 			statement.close();
