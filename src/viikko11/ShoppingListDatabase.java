@@ -1,4 +1,4 @@
-package viikko10;
+package viikko11;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,8 @@ public class ShoppingListDatabase {
 	// "jdbc:sqlite:C:\\Users\\jusju\\Desktop\\syksy2020\\palautettavat\\shoppinglist.sqlite";
 	private static final String URL = "jdbc:sqlite:.\\shoppinglist.sqlite";
 
-	public void listShoppings() {
+	public List<ShoppingListItem> listShoppings() {
+		List<ShoppingListItem> items = new ArrayList<ShoppingListItem>();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager.getConnection(URL);
@@ -33,6 +34,8 @@ public class ShoppingListDatabase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		return items;
 	}
 
 	public void addShopping(String shopping) {
