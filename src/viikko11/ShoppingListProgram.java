@@ -1,28 +1,37 @@
 package viikko11;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ShoppingListProgram {
 
 
 	public void listaaTuotteet() {
-		ShoppingListDatabase db = new ShoppingListDatabase();
+		JDBCShoppingListItemDao dao = new JDBCShoppingListItemDao();
 		System.out.println("Shopping list contents:");
-		db.listShoppings();
+		List<ShoppingListItem> items = dao.getAllItems();
+		for (int i = 0; i < items.size(); i++) {
+			ShoppingListItem item = items.get(i);
+			System.out.println("(" + item.getId() + ") " + item.getOstos());
+		}
 		System.out.println();
 		
 	}
 
 	public void lisaaTuote(String tuote) {
-		ShoppingListDatabase db = new ShoppingListDatabase();
-		db.addShopping(tuote);
+		ShoppingListItem newItem = new ShoppingListItem();
+		newItem.setOstos(tuote);
+		JDBCShoppingListItemDao dao = new JDBCShoppingListItemDao();
+		dao.addItem(newItem);
 		System.out.println("Successfully added " + tuote);
 		System.out.println();
 	}
 
 	public void poistaTuote(String tuote) {
-		ShoppingListDatabase db = new ShoppingListDatabase();
-		db.deleteShopping(tuote);
+		ShoppingListItem item = new ShoppingListItem();
+		item.setOstos(tuote);
+		JDBCShoppingListItemDao dao = new JDBCShoppingListItemDao();
+		dao.removeItem(item);
 		System.out.println("Successfully deleted " + tuote);
 		System.out.println();
 	}
