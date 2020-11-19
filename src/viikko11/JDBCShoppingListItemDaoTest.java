@@ -2,13 +2,16 @@ package viikko11;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Connection;
-
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-class JDBCShoppingListItemDaoTest {
+import java.sql.Connection;
+import java.util.List;
+
+
+public class JDBCShoppingListItemDaoTest {
 
     private JDBCShoppingListItemDao dao = new JDBCShoppingListItemDao();
 
@@ -25,17 +28,53 @@ class JDBCShoppingListItemDaoTest {
     @BeforeEach
     public void setUp() throws Exception {
         Connection connection = dao.connect();
-        //connection.prepareStatement("insert into ShoppingListItem (id, title) values (1, 'Milk'), (2, 'Eggs')").executeUpdate();
+        connection.prepareStatement("insert into ShoppingListItem (id, title) values (1, 'Milk')").executeUpdate();
+        connection.close();
+    }
+    @AfterEach
+	public void terminate() throws Exception {
+        Connection connection = dao.connect();
+        connection.prepareStatement("delete from ShoppingListItem where title='Milk'").executeUpdate();
         connection.close();
     }
 
     // Write the actual tests methods here. You can use Milk (1) and Eggs (2) in all of your tests!
 	@Test
-	void testYTunnus1() {
-		ShoppingListItem item = dao.getItem(2);
-		assertTrue(item.getOstos().equals("Eggs"));
+	void testEggs() {
+    	JDBCShoppingListItemDao dao = new JDBCShoppingListItemDao();		
+    	List<ShoppingListItem> items = dao.getAllItems();
+    	boolean savedCanBeFound = false;
+    	for (int i = 0; i < items.size(); i++) {
+			ShoppingListItem item = items.get(i);
+			if(item.getOstos().equals("Milk")) {
+				savedCanBeFound = true;
+			}
+		}
+    	
+		assertTrue(savedCanBeFound);
 	}
-    
-    
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
